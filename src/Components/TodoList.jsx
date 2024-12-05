@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './TodoList.css';
 
 // create a To-do app that support multiple groups
-// Each group with have a Heading and a list of tasks
+// Each group will have a heading and a list of tasks
 
 const TodoList = () => {
   const [group, setGroup] = useState([]);
