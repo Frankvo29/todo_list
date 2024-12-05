@@ -1,6 +1,6 @@
 /* TodoList.css */
 
-.todo-container {
+.create-group-container {
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
@@ -15,7 +15,7 @@
     color: #333;
     margin-bottom: 20px;
 }
-.input-container{
+.heading-input-container{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,7 +31,7 @@
     align-items: center;
 }
 
-.todo-card {
+.todo-group {
     width: 300px; /* Adjust the width of the cards as needed */
     padding: 20px;
     background-color: white;
@@ -76,7 +76,7 @@
     height: 40px;
 }
 
-.delete-button-heading {
+.delete-group-button {
     height: 40px;
     background-color: rgb(46, 163, 46);
     color: #fff;
@@ -95,12 +95,12 @@
     background-color: #d32f2f;
 }
 
-.list-input {
+.task-input {
     width: 170px;
     height: 25px;
 }
 
-.add-list-button {
+.add-group-button {
     background-color: rgb(46, 163, 46);
     color: #fff;
     border: none;
@@ -111,7 +111,7 @@
     transition: background-color 0.3s ease;
     margin-left: 25px;
 }
-.todo_inside_list {
+.todo_task {
     display: flex;
     gap: 140px;
     margin: 10px;

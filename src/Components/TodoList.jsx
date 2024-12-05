@@ -1,75 +1,79 @@
 import React, { useState } from 'react';
 import './TodoList.css';
 
-const TodoList = () => {
-  const [todos, setTodos] = useState([]);
-  const [headingInput, setHeadingInput] = useState('');
-  const [listInputs, setListInputs] = useState({});
+// create a To-do app that support multiple groups
+// Each group with have a Heading and a list of tasks
 
-  const handleAddTodo = () => {
+const TodoList = () => {
+  const [group, setGroup] = useState([]);
+  const [headingInput, setHeadingInput] = useState("");
+  const [taskInputs, setTaskInputs] = useState({});
+
+  const handleAddGroup = () => {
     if (headingInput.trim() !== "") {
-      setTodos([...todos, {heading: headingInput, lists: [] }]);
+      setGroup([...group, {heading: headingInput, tasks: [] }]);
       setHeadingInput('');
     }
   };
 
-  const handleDeleteTodo = (index) => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
+  const handleDeleteGroup = (index) => {
+    const newGroup = [...group];
+    newGroup.splice(index, 1);
+    setGroup(newGroup);
   };
 
-  const handleAddList = (index) => {
-    if (listInputs[index] && listInputs[index].trim() !== '') {
-        const newTodos = [...todos];
-        newTodos[index].lists.push(listInputs[index]);
-        setTodos(newTodos);
-        setListInputs({ ...listInputs, [index]: '' });
+  const handleAddTask = (index) => {
+    if (taskInputs[index].trim() !== '') {
+        const newGroup = [...group];
+        newGroup[index].tasks.push(taskInputs[index]);
+        setGroup(newGroup);
+        setTaskInputs({ ...taskInputs, [index]: '' });
     }
   };
 
-  const handleListInputChange = (index, value) => {
-    setListInputs({ ...listInputs, [index]: value });
+  const handleTaskInputChange = (index, value) => {
+    setTaskInputs({ ...taskInputs, [index]: value });
   };
 
   return (
     <>
-      <div className="todo-container">
+      <div className="create-group-container">
         <h1 className="title">My Todo List</h1>
-        <div className="input-container">
+        <div className="heading-input-container">
           <input
             type="text"
             className="heading-input"
-            placeholder="Enter heading"
+            placeholder="Create a group"
+            value={headingInput}
             onChange={(e) => setHeadingInput(e.target.value)}
           />
-          <button onClick={handleAddTodo} className="add-list-button">Add Heading</button>
+          <button onClick={handleAddGroup} className="add-group-button">Add Group</button>
         </div>
       </div>
       <div className="todo_main">
-        {todos.map((todo, index) => (
-          <div key={index} className="todo-card">
+        {group.map((item, index) => (
+          <div key={index} className="todo-group">
 
             <div className="heading_todo">
-              <h3>{todo.heading}</h3>
-              <button className="delete-button-heading" onClick={handleDeleteTodo}>Delete Heading</button>
+              <h3>{item.heading}</h3>
+              <button className="delete-group-button" onClick={() => handleDeleteGroup(index)}>Delete Group</button>
             </div>
             <ul>
-             {todo.lists.map((list, listIndex) => (
-               <li key={listIndex} className='todo_inside_list'>
-                <p>{list}</p>
+             {item.tasks.map((task, taskIndex) => (
+               <li key={taskIndex} className="todo_task">
+                <p>{task}</p>
                </li>
              ))}
            </ul>
-            <div className="add_list">
+            <div className="add_task">
               <input
                 type="text"
-                className="list-input"
-                placeholder="Add list"
-                value={listInputs[index] || ""}
-                onChange={(e) => handleListInputChange(index, e.target.value)}
+                className="task-input"
+                placeholder="Add task"
+                value={taskInputs[index] || ""}
+                onChange={(e) => handleTaskInputChange(index, e.target.value)}
               />
-              <button className="add-list-button" onClick={() => handleAddList(index)}>Add list</button>
+              <button className="add-task-button" onClick={() => handleAddTask(index)}>Add task</button>
             </div>
 
           </div>
